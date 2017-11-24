@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title></title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css">
+        <link rel="stylesheet" href="./css/main.css">
+    </head>
+    <body>
+        <div class="nav navbar navbar-default">
+            <div class="col-md-8">
+                <div class="navbar-header">
+                    <a href="#" class="navbar-brand">
+                        <img src="./img/hfut_logo.png" alt="Logo">
+                    </a>
+                </div>
+                <span id="nav-title">工大新闻站</span> 
+            </div>
+            <div class="nav col-md-4">
+                <div class="input-group ">
+                    <input type="text" id="input" class="form-control" placeholder="搜索学院" >
+                </div>
+            </div>
+        </div>
+        <div id="news-view">
+            <div class="col-md-6 show-col">
+                <show-card></show-card>
+                <show-card></show-card>
+            </div>
+            <div class="col-md-6 show-col">
+                <show-card></show-card>
+                <show-card></show-card>
+            </div>
+        </div>
+
+
+
+
+        <template id="card-tpl">
+            <div class="card">
+                <div class="card-title">
+                    学院
+                    <span class="title-time">更新时间</span>
+                </div>
+                <ul id="news" class="list-group">
+                    <li class="list-group-item news-list" ><a href="">news1</a></li>
+                    <li class="list-group-item news-list"><a href="">news2</a></li>
+                    <li class="list-group-item news-list"><a href="">news3</a></li>
+                </ul>
+            </div>
+        </template>
+        <script src="https://cdn.bootcss.com/vue/2.4.4/vue.js"></script>
+        <script src="index.js"></script>
+    </body>
+</html>
