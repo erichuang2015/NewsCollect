@@ -21,6 +21,7 @@ class News(Base):
     content = Column(Text)  # html正文
     timestamp = Column(TIMESTAMP)  # 抓取时间戳
 
+
 def get_session():
     db_path = os.path.abspath(os.path.join(os.path.dirname(__file__), os.pardir)) + 'data.db'
     engine = create_engine('sqlite:///' + db_path)

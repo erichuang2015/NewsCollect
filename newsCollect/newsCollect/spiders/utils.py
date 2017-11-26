@@ -81,6 +81,10 @@ def img_url_complement(img, base_url):
         img.attrs['src'] = base_url + img.attrs['src']
     return img
 
+
+def clean_string(str):
+    return str.replace('\t', '').replace('\n', '').replace('\r', '')
+
 if __name__ == '__main__':
     r = requests.get('http://news.hfut.edu.cn/show-1-72510-1.html')
     s = bs(r.content)

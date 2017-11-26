@@ -18,5 +18,47 @@ info = {
             '17': '科技视点',
             '3': '招标采购',
         }
+    },
+    'jxgc': {
+        'unit': '机械工程学院',
+        'url_template': 'http://jxxy.hfut.edu.cn/index.php/cn/xwgg/[primary_title]',
+        'tag_codes': {
+            'news1': {
+                'tzgg1': '学院通告',
+                'tzgg2': '科研公告',
+                'tzgg3': '研究生培养公告',
+                'tzgg4': '本科教育通知',
+                'tzgg5': '党建公告',
+            },
+            'news2': '学院新闻',
+            'news3': '科研信息',
+        }
+    },
+    'CI': {
+        'unit': '计算机与信息学院',
+        'url_template': 'http://ci.hfut.edu.cn/index/tit/cid/[tag_code]',
+        'tag_codes': {
+            '9': '通知公告',
+            '8': '学院新闻',
+        },
+    },
+    'EA': {
+        'unit': '电气与自动化工程学院',
+        'url_template': 'http://ea.hfut.edu.cn/ea/index.php/cn/ea-news/[tag_code]',
+        'tag_codes': {
+            'ea-news-zh': '学院新闻',
+            'announcements-zh': '通知公告',
+            'ea-academic': '学术动态',
+            'ea-photonews': '精选图文',
+        },
+    },
+    'MSE': {
+        'unit': '材料科学与工程学院',
+        'url_template': 'http://mse.hfut.edu.cn/news.php?i=[tag_code]',
+        'tag_codes': {
+            '20': '学院新闻',
+            '21': '通知公告',
+        }
     }
+
 }

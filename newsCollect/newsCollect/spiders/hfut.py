@@ -1,6 +1,5 @@
 # -*- coding: utf-8 -*-
 import scrapy
-from bs4 import BeautifulSoup as bs
 from scrapy.http import Request
 from ..items import NewsItem
 from .info import info

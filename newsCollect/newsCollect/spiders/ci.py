@@ -9,11 +9,11 @@ import datetime
 import time
 
 
-class jsj(scrapy.Spider):
-    name = 'jsj'
+class CI(scrapy.Spider):
+    name = 'CI'
     base_url = 'http://ci.hfut.edu.cn/'
-    url_template = info['jsj']['url_template']
-    tag_codes = info['jsj']['tag_codes']
+    url_template = info['CI']['url_template']
+    tag_codes = info['CI']['tag_codes']
     count = 0
 
     def start_requests(self):
@@ -42,7 +42,6 @@ class jsj(scrapy.Spider):
         item['title'] = meta['title']
         item['time'] = datetime.datetime.strptime(time_, '%Y-%m-%d').date()
         item['url'] = response.url
-        item['unit'] = info['jsj']['unit']
+        item['unit'] = info['CI']['unit']
         item['type'] = meta['type']
         item['timestamp'] = datetime.datetime.utcfromtimestamp(int(time.time()))
-        return item

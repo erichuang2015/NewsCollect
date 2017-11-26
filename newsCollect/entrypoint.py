@@ -2,4 +2,4 @@
 
 from scrapy.cmdline import execute
 
-execute(['scrapy', 'crawl', 'hfut'])
+execute(['scrapy', 'crawl', 'EA'])
