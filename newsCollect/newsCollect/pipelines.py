@@ -6,8 +6,10 @@
 # See: http://doc.scrapy.org/en/latest/topics/item-pipeline.html
 import sys
 
-from db import News, get_session
 import sqlalchemy
+
+from newsCollect.db import News, get_session
+
 reload(sys)
 sys.setdefaultencoding('utf8')
 
