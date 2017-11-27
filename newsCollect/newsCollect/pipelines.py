@@ -8,7 +8,7 @@ import sys
 
 import sqlalchemy
 
-from newsCollect.db import News, get_session
+from db import News, get_session
 
 reload(sys)
 sys.setdefaultencoding('utf8')
