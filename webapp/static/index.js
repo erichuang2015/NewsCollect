@@ -64,17 +64,18 @@ var show = new Vue({
         ],*/
     },
     mounted: function () {
-        console.log('ready');
+        //console.log('ready');
         this.getUnits();
     },
     methods: {
         getUnits: function () {
             this.$http.jsonp(this.url)
-            .then((response) => {
-                this.$set('units', response.data)
-                }).catch(function (response) {
-                    console.log(response)
-            })
+            .then((res) => {
+                console.log(res.data);
+                this.set('units', res.data)
+                })
+                //.catch(function (response) {
+                //console.log(response) })
         }
     }
       

@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 import sys
-
+from flask_json import as_json_p
 from flask import jsonify, current_app
 from bs4 import BeautifulSoup as bs
 from ..models import News
@@ -13,6 +13,7 @@ sys.setdefaultencoding('utf8')
 
 
 @api_0_8.route('/unit_list')
+@as_json_p
 def unit_list():
     """
     获取已有单位
@@ -38,6 +39,7 @@ def unit_list():
 
 
 @api_0_8.route('/news/<unit_code>')
+@as_json_p
 def news_list(unit_code):
     """
     获取单位新闻列表
@@ -67,6 +69,7 @@ def news_list(unit_code):
 
 
 @api_0_8.route('/news/<int:id>')
+@as_json_p
 def get_news(id):
     """
 
