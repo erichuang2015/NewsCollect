@@ -35,7 +35,7 @@ def unit_list():
             'name': info[unit]['unit'],
         }
         unit_info.append(item)
-    return jsonify(unit_info)
+    return unit_info
 
 
 @api_0_8.route('/news/<unit_code>')
@@ -65,7 +65,7 @@ def news_list(unit_code):
             'url': q[i].url,
         }
         news_list.append(item)
-    return jsonify(news_list)
+    return news_list
 
 
 @api_0_8.route('/news/<int:id>')
@@ -91,7 +91,7 @@ def get_news(id):
         'content': content.prettify(),
         'timestamp': q.timestamp,
     }
-    return jsonify(res)
+    return res
 
 
 
