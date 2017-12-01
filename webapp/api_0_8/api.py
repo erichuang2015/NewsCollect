@@ -17,19 +17,23 @@ def unit_list():
     """
     获取已有单位
     :return:
-    {
-        单位代码：{
+    [
+        {
+            code: 单位代码
             name: 单位名称,
             tag_codes: tag代码及名称,
-            }
-    }
+        }
+    ]
     """
     current_app.logger.debug(api_0_8)
-    unit_info = {}
+    unit_info = []
     for unit in info:
-        unit_info[unit] = {}
-        unit_info[unit]['tag_codes'] = info[unit]['tag_codes']
-        unit_info[unit]['name'] = info[unit]['unit']
+        item = {
+            'code': unit,
+            'tag_codes': info[unit]['tag_codes'],
+            'name': info[unit]['unit'],
+        }
+        unit_info.append(item)
     return jsonify(unit_info)
 
 
@@ -48,15 +52,15 @@ def news_list(unit_code):
     ...]
     """
     news_list = []
-    q = News.query.filter_by(unit=unicode(info[unit_code]['unit'])).all()
+    q = News.query.filter_by(unit=unicode(info[unit_code]['unit'])).order_by('time').all()
     if q is None:
         return not_found("items not found")
-    for i in q:
+    for i in range(10):
         item = {
-            'title': '【' + i.type + '】' + i.title,
-            'id': i.id,
-            'time': i.time.strftime('%y-%m-%d'),
-            'url': i.url,
+            'title': '【' + q[i].type + '】' + q[i].title,
+            'id': q[i].id,
+            'time': q[i].time.strftime('%y-%m-%d'),
+            'url': q[i].url,
         }
         news_list.append(item)
     return jsonify(news_list)
