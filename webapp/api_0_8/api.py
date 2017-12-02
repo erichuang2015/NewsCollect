@@ -53,10 +53,14 @@ def get_news_list(unit_code):
     ...]
     """
     news_list = []
-    q = News.query.filter_by(unit=unicode(info[unit_code]['unit'])).order_by('time').all()
+    tag = request.args.get('tag', None)
+    num = int(request.args.get('num', 10))
+    q = News.query.filter_by(unit=unicode(info[unit_code]['unit'])).order_by('time')
+    if tag is not None:
+        q = q.filter_by(type=unicode(tag))
+    q = q.all()
     if q is None:
         return not_found("items not found")
-    num = request.args.get('num', 10)
     for i in range(num)[::-1]:
         try:
             item = {

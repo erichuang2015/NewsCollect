@@ -4,3 +4,5 @@ data.db
 newsCollect/.scrapy
 *.pyc
 .vscode/
+TODO.md
+
