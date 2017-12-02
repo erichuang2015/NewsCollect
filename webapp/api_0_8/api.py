@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 import sys
-from flask import jsonify, current_app
+from flask import jsonify, current_app, request
 from bs4 import BeautifulSoup as bs
 from ..models import News
 from . import api_0_8
@@ -56,7 +56,8 @@ def get_news_list(unit_code):
     q = News.query.filter_by(unit=unicode(info[unit_code]['unit'])).order_by('time').all()
     if q is None:
         return not_found("items not found")
-    for i in range(10)[::-1]:
+    num = request.args.get('num', 10)
+    for i in range(num)[::-1]:
         try:
             item = {
                 'title': '【' + q[i].type + '】' + q[i].title,
