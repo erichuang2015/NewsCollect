@@ -1,19 +1,19 @@
 # -*- coding: utf-8 -*-
 import sys
-from flask_json import as_json_p
 from flask import jsonify, current_app
 from bs4 import BeautifulSoup as bs
 from ..models import News
 from . import api_0_8
 from ..erros import not_found
 from ..info import info
+from ..utils import jsonp
 
 reload(sys)
 sys.setdefaultencoding('utf8')
 
 
 @api_0_8.route('/unit_list')
-@as_json_p
+@jsonp
 def unit_list():
     """
     获取已有单位
@@ -26,7 +26,6 @@ def unit_list():
         }
     ]
     """
-    current_app.logger.debug(api_0_8)
     unit_info = []
     for unit in info:
         item = {
@@ -35,12 +34,12 @@ def unit_list():
             'name': info[unit]['unit'],
         }
         unit_info.append(item)
-    return unit_info
+    return jsonify(unit_info)
 
 
 @api_0_8.route('/news/<unit_code>')
-@as_json_p
-def news_list(unit_code):
+@jsonp
+def get_news_list(unit_code):
     """
     获取单位新闻列表
     :return:
@@ -57,19 +56,22 @@ def news_list(unit_code):
     q = News.query.filter_by(unit=unicode(info[unit_code]['unit'])).order_by('time').all()
     if q is None:
         return not_found("items not found")
-    for i in range(10):
-        item = {
-            'title': '【' + q[i].type + '】' + q[i].title,
-            'id': q[i].id,
-            'time': q[i].time.strftime('%y-%m-%d'),
-            'url': q[i].url,
-        }
-        news_list.append(item)
-    return news_list
+    for i in range(10)[::-1]:
+        try:
+            item = {
+                'title': '【' + q[i].type + '】' + q[i].title,
+                'id': q[i].id,
+                'time': q[i].time.strftime('%y-%m-%d'),
+                'url': q[i].url,
+            }
+            news_list.append(item)
+        except IndexError:
+            break
+    return jsonify(news_list)
 
 
 @api_0_8.route('/news/<int:id>')
-@as_json_p
+@jsonp
 def get_news(id):
     """
 
@@ -91,7 +93,7 @@ def get_news(id):
         'content': content.prettify(),
         'timestamp': q.timestamp,
     }
-    return res
+    return jsonify(res)
 
 
 

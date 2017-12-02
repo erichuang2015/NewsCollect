@@ -8,31 +8,32 @@
         <link rel="stylesheet" href="./css/main.css">
     </head>
     <body>
-        <div class="nav navbar navbar-default">
-            <div class="col-md-8">
-                <div class="navbar-header">
-                    <a href="#" class="navbar-brand">
-                        <img src="./img/hfut_logo.png" alt="Logo">
-                    </a>
+        <div id="app">
+            <div class="nav navbar navbar-default">
+                <div class="col-md-8">
+                    <div class="navbar-header">
+                        <a href="#" class="navbar-brand">
+                            <img src="./img/hfut_logo.png" alt="Logo">
+                        </a>
+                    </div>
+                    <span id="nav-title">工大新闻站</span> 
                 </div>
-                <span id="nav-title">工大新闻站</span> 
+                <div class="nav col-md-4">
+                    <div class="input-group ">
+                        <input v-model="currentInput" type="text" id="input" class="form-control" placeholder="搜索学院" 
+                         onKeypress="javascript:if(event.keyCode == 32)event.returnValue = false;">
+                    </div>
+                    
+                </div>
             </div>
-            <div class="nav col-md-4">
-                <div class="input-group ">
-                    <input type="text" id="input" class="form-control" placeholder="搜索学院" >
+            <div id="news-view">
+                <div class="col-md-6 show-col" v-for="unit in units" >
+                    <show-card v-if="isShow(unit.code)" :info="unit"></show-card>
                 </div>
             </div>
         </div>
-        <div id="news-view">
-            <div class="col-md-6 show-col" v-for="unit in units" >
-                 <show-card :info="unit"></show-card>
-            </div>
-        </div>
-
-
-
-
-        <template id="card-tpl">
+        
+        <template id="card-tpl" >
             <div class="card">
                 <div class="card-title">
                     {{info.name}}
@@ -41,6 +42,7 @@
                 <ul id="news" class="list-group">
                     <li class="list-group-item news-list" v-for="item in items">
                         <a :href="item.url">{{item.title}}</a>
+                        <span style="float:right; font-size:14px; color:grey">{{item.time}}</span>
                     </li>
                 </ul>
             </div>
