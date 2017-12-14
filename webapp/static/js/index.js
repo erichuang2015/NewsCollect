@@ -27,6 +27,7 @@ var card = Vue.component('show-card', {
     data: function() {
         return {
             items: [],
+            detailUrl: '/detail/' + this.info.code,
         }
     },
     methods: {

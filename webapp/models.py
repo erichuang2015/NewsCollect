@@ -1,10 +1,9 @@
 # -*- coding: utf-8 -*-
-from manager import db
+from app import db
 
 
 class News(db.Model):
     __tablename__ = 'news'
-
     id = db.Column(db.Integer, primary_key=True)
     title = db.Column(db.String)  # 标题
     unit = db.Column(db.String)  # 文章所属单位

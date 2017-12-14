@@ -1,18 +1,18 @@
 # -*- coding: utf-8 -*-
 import sys
+from app import app
 from flask import jsonify, current_app, request
 from bs4 import BeautifulSoup as bs
-from ..models import News
-from . import api_0_8
-from ..erros import not_found
-from ..info import info
-from ..utils import jsonp
+from models import News
+from erros import not_found
+from info import info
+from utils import jsonp
 
 reload(sys)
 sys.setdefaultencoding('utf8')
 
 
-@api_0_8.route('/unit_list')
+@app.route('/api/unit_list')
 @jsonp
 def unit_list():
     """
@@ -37,7 +37,7 @@ def unit_list():
     return jsonify(unit_info)
 
 
-@api_0_8.route('/news/<unit_code>')
+@app.route('/api/<unit_code>')
 @jsonp
 def get_news_list(unit_code):
     """
@@ -75,7 +75,7 @@ def get_news_list(unit_code):
     return jsonify(news_list)
 
 
-@api_0_8.route('/news/<int:id>')
+@app.route('/api/news/<int:id>')
 @jsonp
 def get_news(id):
     """

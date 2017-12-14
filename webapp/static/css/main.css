@@ -53,9 +53,17 @@ a, a:hover{
     margin-bottom: 10px;
 }
 
-.card-title {
+.card-title{
     border-bottom: 2px solid #aaaaaa;
     font-size: 24px;
+}
+
+.card-title a {
+    font-size: 24px;
+}
+
+.card-title a:hover{
+    color: #a6282f;
 }
 
 .title-time {

@@ -5,10 +5,10 @@
 # Don't forget to add your pipeline to the ITEM_PIPELINES setting
 # See: http://doc.scrapy.org/en/latest/topics/item-pipeline.html
 import sys
-
 import sqlalchemy
-
 from db import News, get_session
+import json
+import redis
 
 reload(sys)
 sys.setdefaultencoding('utf8')
@@ -18,6 +18,12 @@ TODO: 2017/10/30
     - 使用redis增量去重
 '''
 
+with open('conf.json') as f:
+    conf = json.load(f)
+
+
+
+class DuplicatePipeline(object):
 
 class NewsItemPipeline(object):
     def open_spider(self, spider):
