@@ -90,3 +90,8 @@ a, a:hover{
 .news-list:first-child {
     margin-top: 5px;
 }
+
+.sidebar {
+    border-right: 1px dotted gray;
+}
+
