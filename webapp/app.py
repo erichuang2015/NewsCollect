@@ -9,6 +9,8 @@ from bs4 import BeautifulSoup as bs
 from erros import not_found
 from info import info
 from utils import jsonp, get_tag_list
+from sqlalchemy.sql import func
+import datetime
 
 # reload(sys)
 # sys.setdefaultencoding('utf8')
@@ -57,18 +59,26 @@ def unit_list():
             code: 单位代码
             name: 单位名称,
             tag_codes: tag代码及名称,
+            latest: 更新时间戳
         }
     ]
     """
     unit_info = []
     for unit in info:
+        try:
+            timestamp = News.query.filter_by(unit=info[unit]['unit'])\
+                            .order_by('timestamp').first().timestamp
+            timestamp = timestamp.strftime("%Y-%m-%d %H:%M:%S")
+        except AttributeError as e:
+            print(e)
+            timestamp = '状态获取失败'
         item = {
             'code': unit,
             'tag_codes': info[unit]['tag_codes'],
             'name': info[unit]['unit'],
+            'latest': timestamp,
         }
         unit_info.append(item)
-    print(type(jsonify(unit_info).data))
     return jsonify(unit_info)
 
 
