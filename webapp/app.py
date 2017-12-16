@@ -68,6 +68,7 @@ def unit_list():
             'name': info[unit]['unit'],
         }
         unit_info.append(item)
+    print(type(jsonify(unit_info).data))
     return jsonify(unit_info)
 
 
@@ -184,7 +185,7 @@ def detail(unit, tag):
         'max_page': max_page,
         'news_list': news_list,
     }
-    print(max_page)
+    print(data['page'], data['max_page'])
     # current_app.logger.debug(url_for('detail', unit=unit, tag=tag_list[2], param=111))
     return render_template('detail.html', data=data)  
 
