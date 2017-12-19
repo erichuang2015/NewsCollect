@@ -7,9 +7,18 @@ from .utils import *
 from bs4 import BeautifulSoup as bs
 import datetime
 import time
+from newsCollect.utils import get_conf_from_json
 
+conf = get_conf_from_json('../conf.json')
+if conf is None:
+    conf = {
+        "spider": {
+        "load_spider": [],
+        "crawl_page": 5
+        }
+    }
 
-class hfutSpider(scrapy.Spider):
+class hfut(scrapy.Spider):
     name = 'hfut'
     base_url = 'http://news.hfut.edu.cn/'
     url_template = info['hfut']['url_template']
@@ -26,7 +35,7 @@ class hfutSpider(scrapy.Spider):
         max_page = int(response.xpath('//*[@id="pages"]/a/text()').extract()[-2])
         # print(max_page)
         code = response.meta['tag_code']
-        for p in range(1, 5):
+        for p in range(1, conf['spider']['crawl_page']):
             url = render_url(self.url_template, tag_code=code, page=p)
             # print(url)
             yield Request(url, self.get_news, meta={'tag_code': code}, dont_filter=True)
@@ -66,12 +75,6 @@ class hfutSpider(scrapy.Spider):
         item['type'] = self.tag_codes[meta['tag_code']]
         item['timestamp'] = datetime.datetime.utcfromtimestamp(int(time.time()))
         return item
-
-    def get_content_test(self, response):
-        self.count += 1
-        print('crawl No.%s: %s' % (self.count, response.meta['time']))
-
-
 
 
 

@@ -7,7 +7,6 @@ import os
 # 对象基类
 Base = declarative_base()
 
-
 class News(Base):
     __tablename__ = 'news'
 
@@ -22,8 +21,8 @@ class News(Base):
     timestamp = Column(TIMESTAMP)  # 抓取时间戳
 
 
-def get_session():
-    db_path = os.path.abspath('..') + '\data.db'
+def get_session(db_name):
+    db_path = os.path.abspath('..') + '\%s' % db_name
     engine = create_engine('sqlite:///' + db_path)
     Base.metadata.create_all(engine)
     db_session = sessionmaker(bind=engine)

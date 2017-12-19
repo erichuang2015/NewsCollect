@@ -1,8 +1,13 @@
 {
-    "load_spider" : [],
+    "spider" : {
+        "load_spider": [],
+        "crawl_page": 5
+
+    },
     "redis": {
         "host": "127.0.0.1",
         "port": 6379,
-        "pw": "",
+        "pw": ""
     }
+
 }

@@ -6,9 +6,10 @@
 # See: http://doc.scrapy.org/en/latest/topics/item-pipeline.html
 import sys
 import sqlalchemy
-from db import News, get_session
-import json
+from .db import News, get_session
+from utils import get_conf_from_json
 import redis
+from spiders.info import info
 
 reload(sys)
 sys.setdefaultencoding('utf8')
@@ -18,16 +19,38 @@ TODO: 2017/10/30
     - 使用redis增量去重
 '''
 
-with open('conf.json') as f:
-    conf = json.load(f)
+conf = get_conf_from_json('conf.json')
+if conf is None:
+    conf = {
+        "redis": {
+            "host": "127.0.0.1",
+            "port": 6379,
+            "pw": "",
+        }
+    }
 
 
 
 class DuplicatePipeline(object):
+    def open_spider(self, spider):
+        redis_conf = conf['redis']
+        self.redis_db = redis.Redis(host=redis_conf['host'], port=redis_conf['port'], db=4)
+        self.db_session = get_session('db_test.db')
+    def process_item(self, item, spider):
+        # 字段存在校验
+        if self.redis_db.hlen(item['unit']) == 0:
+            self.redis_db.hset(item['unit'], item['url'], '')
+            return item
+        ex = self.redis_db.hget(item['unit'], item['url'])
+        if ex is None:
+            self.redis_db.hset(item['unit'], item['url'], '')
+            return item
+        print('item Duplicate: url[%s]' % item['url'])
+        
 
 class NewsItemPipeline(object):
     def open_spider(self, spider):
-        self.session = get_session()
+        self.session = get_session('db_test.db')
 
     def process_item(self, item, spider):
         new_news = News(
