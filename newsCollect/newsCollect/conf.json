@@ -1,7 +1,7 @@
 {
     "spider" : {
-        "load_spider": [],
-        "crawl_page": 5
+        "load_spider": ["EA"],
+        "crawl_page": 1
 
     },
     "redis": {

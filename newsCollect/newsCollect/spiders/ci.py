@@ -7,7 +7,10 @@ from .utils import *
 from bs4 import BeautifulSoup as bs
 import datetime
 import time
+from newsCollect.utils import get_conf_from_json
 
+
+conf = get_conf_from_json('../conf.json')
 
 class CI(scrapy.Spider):
     name = 'CI'

@@ -30,5 +30,5 @@ def get_session(db_name):
 
 
 if __name__ == '__main__':
-    print os.path.abspath('..') + '\data.db'
+   pass
 
