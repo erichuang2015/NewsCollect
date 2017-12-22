@@ -7,6 +7,16 @@ from .utils import *
 from bs4 import BeautifulSoup as bs
 import datetime
 import time
+from newsCollect.utils import get_conf_from_json
+
+conf = get_conf_from_json('../conf.json')
+if conf is None:
+    conf = {
+        "spider": {
+            "load_spider": [],
+            "crawl_page": 1
+        }
+    }
 
 
 class EA(scrapy.Spider):
@@ -27,7 +37,7 @@ class EA(scrapy.Spider):
         for tr in table.find_all('tr'):
             tds = tr.find_all('td')
             title = clean_string(tds[0].a.string)
-            url = self.base_url + tds[0].a.attrs['href']
+            url = self.base_url + tds[0].a.attrs['href'] # 测试性爬取一页
             time_ = clean_string(tds[-1].string)
             yield Request(url, self.get_content, meta={'type': response.meta['type'],
                                                        'title': title,
@@ -48,4 +58,3 @@ class EA(scrapy.Spider):
         item['type'] = meta['type']
         item['timestamp'] = datetime.datetime.utcfromtimestamp(int(time.time()))
         return item
-        # print item

@@ -10,10 +10,11 @@ def get_conf_from_json(path):
         return None
     return config
 
-
-if __name__ == '__main__':
-    conf = get_conf_from_json('conf.json')
+def clear_redis(conf_path='conf.json'):
+    conf = get_conf_from_json(conf_path)
     redis_conf = conf['redis']
-    redis_db = redis.Redis(
-        host=redis_conf['host'], port=redis_conf['port'], db=4)
-    print(redis_db.hlen('test'))
+    redis_db = redis.Redis(host=redis_conf['host'], port=redis_conf['port'])
+    redis_db.flushdb()
+        
+if __name__ == '__main__':
+    clear_redis()

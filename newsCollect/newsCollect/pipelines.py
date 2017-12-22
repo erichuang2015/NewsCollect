@@ -38,6 +38,8 @@ class DuplicatePipeline(object):
         self.db_session = get_session('dev.db')
     def process_item(self, item, spider):
         # 字段存在校验
+        # self.redis_db.flushall()
+        # print(self.redis_db.hlen(item['unit']))
         if self.redis_db.hlen(item['unit']) == 0:
             self.redis_db.hset(item['unit'], item['url'], '')
             return item
@@ -47,21 +49,25 @@ class DuplicatePipeline(object):
             return item
         print('item Duplicate: url[%s]' % item['url'])
         
+    def close_spider(self, spider):
+        self.db_session.close()
 
 class NewsItemPipeline(object):
     def open_spider(self, spider):
         self.session = get_session('dev.db')
 
     def process_item(self, item, spider):
+        if item is None:
+            return item
         new_news = News(
-            title=unicode(item['title']),
-            unit=unicode(item['unit']),
-            type=unicode(item['type']),
-            time=item['time'],
-            url=unicode(item['url']),
-            imgs=unicode(item['imgs']),
-            content=unicode(item['content']),
-            timestamp=item['timestamp']
+            title = item['title'],
+            unit = item['unit'],
+            type = item['type'],
+            time = item['time'],
+            url = item['url'],
+            imgs = item['imgs'],
+            content = item['content'],
+            timestamp = item['timestamp']
         )
         self.session.add(new_news)
         try:
