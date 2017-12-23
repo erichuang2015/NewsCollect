@@ -14,7 +14,7 @@ if conf is None:
     conf = {
         "spider": {
         "load_spider": [],
-        "crawl_page": 5
+        "crawl_page": 1
         }
     }
 
