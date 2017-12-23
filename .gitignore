@@ -7,3 +7,4 @@ newsCollect/.scrapy
 TODO.md
 **/__pycache__
 部署日志.md
+fabric.py

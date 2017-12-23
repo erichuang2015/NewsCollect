@@ -1,8 +1,7 @@
 {
     "spider" : {
-        "load_spider": ["jxgc"],
+        "load_spider": ["hfut", "EA", "jxgc"],
         "crawl_page": 1
-
     },
     "redis": {
         "host": "127.0.0.1",
