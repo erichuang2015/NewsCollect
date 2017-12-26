@@ -1,6 +1,6 @@
 {
     "spider" : {
-        "load_spider": ["jxgc"],
+        "load_spider": ["jxgc", "huft", "EA"],
         "crawl_page": 1
 
     },
