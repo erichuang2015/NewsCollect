@@ -8,6 +8,12 @@ from bs4 import BeautifulSoup as bs
 import datetime
 import time
 from newsCollect.utils import get_conf_from_json
+import sys
+
+if sys.version_info.major == 2:
+    reload(sys)
+    sys.setdefaultencoding('utf8')
+
 
 conf = get_conf_from_json('../conf.json')
 if conf is None:

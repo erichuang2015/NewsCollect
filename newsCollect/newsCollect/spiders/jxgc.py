@@ -10,6 +10,11 @@ from bs4 import BeautifulSoup as bs
 import datetime
 import time
 import re
+import sys
+
+if sys.version_info.major == 2:
+    reload(sys)
+    sys.setdefaultencoding('utf8')
 
 
 class JXGC(scrapy.Spider):
