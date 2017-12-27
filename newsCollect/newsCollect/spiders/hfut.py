@@ -8,6 +8,11 @@ from bs4 import BeautifulSoup as bs
 import datetime
 import time
 from newsCollect.utils import get_conf_from_json
+import sys
+
+reload(sys)
+sys.setdefaultencoding("utf-8")
+
 
 conf = get_conf_from_json('../conf.json')
 if conf is None:
@@ -66,14 +71,14 @@ class hfut(scrapy.Spider):
 
         meta = response.meta
         item = NewsItem()
-        item['imgs'] = get_img_urls(content, self.base_url)
-        item['content'] = content_process(content, self.base_url).encode('utf-8')
-        item['title'] = meta['title']
-        item['time'] = datetime.datetime.strptime(meta['time'], '%Y-%m-%d').date()
-        item['url'] = response.url
-        item['unit'] = info['hfut']['unit']
-        item['type'] = self.tag_codes[meta['tag_code']]
-        item['timestamp'] = datetime.datetime.utcfromtimestamp(int(time.time()))
+        item['imgs'] = unicode(get_img_urls(content, self.base_url))
+        item['content'] = unicode(content_process(content, self.base_url).encode('utf-8'))
+        item['title'] = unicode(meta['title'])
+        item['time'] = unicode(datetime.datetime.strptime(meta['time'], '%Y-%m-%d').date())
+        item['url'] = unicode(response.url)
+        item['unit'] = unicode(info['hfut']['unit'])
+        item['type'] = unicode(self.tag_codes[meta['tag_code']])
+        item['timestamp'] = unicode(datetime.datetime.utcfromtimestamp(int(time.time())))
         return item
 
 

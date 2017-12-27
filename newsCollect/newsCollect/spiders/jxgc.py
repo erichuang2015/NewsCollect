@@ -10,7 +10,10 @@ from bs4 import BeautifulSoup as bs
 import datetime
 import time
 import re
+import sys
 
+reload(sys)
+sys.setdefaultencoding("utf-8")
 
 class JXGC(scrapy.Spider):
     name = 'jxgc'
@@ -50,12 +53,12 @@ class JXGC(scrapy.Spider):
 
         meta = response.meta
         item = NewsItem()
-        item['imgs'] = get_img_urls(content, self.base_url)
-        item['content'] = content_process(content, self.base_url).encode('utf-8')
-        item['title'] = meta['title']
-        item['time'] = datetime.datetime.strptime(meta['time'], '%Y-%m-%d').date()
-        item['url'] = response.url
-        item['unit'] = info['jxgc']['unit']
-        item['timestamp'] = datetime.datetime.utcfromtimestamp(int(time.time()))
-        item['type'] = meta['tag_code']
+        item['imgs'] = unicode(get_img_urls(content, self.base_url))
+        item['content'] = unicode(content_process(content, self.base_url).encode('utf-8'))
+        item['title'] = unicode(meta['title'])
+        item['time'] = unicode(datetime.datetime.strptime(meta['time'], '%Y-%m-%d').date())
+        item['url'] = unicode(response.url)
+        item['unit'] = unicode(info['jxgc']['unit'])
+        item['timestamp'] = unicode(datetime.datetime.utcfromtimestamp(int(time.time())))
+        item['type'] = unicode(meta['tag_code'])
         return item
