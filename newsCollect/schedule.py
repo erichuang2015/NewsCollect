@@ -2,7 +2,7 @@
 from newsCollect.utils import get_conf_from_json
 import time
 from scrapy.cmdline import execute
-from apscheduler.schedulers.blocking import BlockingScheduler
+
 
 spider_conf = get_conf_from_json('newsCollect/conf.json')['spider']
 
