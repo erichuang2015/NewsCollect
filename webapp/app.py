@@ -1,7 +1,6 @@
 # -*- coding: utf-8 -*-
 from flask import Flask, jsonify, current_app, request, \
                     render_template, redirect, url_for
-from flask_script import Manager
 from flask_sqlalchemy import SQLAlchemy
 from flask_bootstrap import Bootstrap
 import os, sys
@@ -12,13 +11,10 @@ from utils import jsonp, get_tag_list
 from sqlalchemy.sql import func
 import datetime
 
-# reload(sys)
-# sys.setdefaultencoding('utf8')
-
 app = Flask(__name__, template_folder='templates')
 app.debug = True
 bootstrap = Bootstrap(app)
-db_path = os.path.abspath('.') + '\data.db'
+db_path = os.path.abspath('..') + '\data.db'
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///' + db_path
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = True
 db = SQLAlchemy(app)
@@ -154,6 +150,10 @@ def get_news(id):
 #        \ \ / /  | |  / _ \ \ \ /\ / / / __|
 #         \ V /   | | |  __/  \ V  V /  \__ \
 #          \_/    |_|  \___|   \_/\_/   |___/
+
+@app.route('/')
+def index():
+    return app.send_static_file('index.html')
 
 @app.route('/detail/<unit>')
 def detail_redirect(unit):
