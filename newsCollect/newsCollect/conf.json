@@ -1,16 +1,21 @@
 {
     "spider" : {
-<<<<<<< HEAD
         "load_spider": ["hfut", "EA", "jxgc"],
-=======
-        "load_spider": ["jxgc", "huft", "EA"],
->>>>>>> 411c425801a90fbf41d4e7b5431654566ea7cf38
         "crawl_page": 1
     },
     "redis": {
         "host": "127.0.0.1",
         "port": 6379,
         "pw": ""
+    },
+    "db": {
+        "using_db": "mysql",
+        "db_info": {
+            "mysql": {
+                "usr": "root",
+                "host": "localhost"
+            }
+        }
     }
 
 }
