@@ -5,20 +5,11 @@ from sqlalchemy.orm import sessionmaker
 import os
 from .utils import get_conf_from_json
 
+
 conf = get_conf_from_json('conf.json')
 if conf is None:
-    db_conf = {
-        "using_db": "mysql",
-        "db_info": {
-            "mysql": {
-                "usr": "root",
-                "host": "localhost",
-                "database": "NewsCollect",
-            }
-        }
-    }
-else:
-    db_conf = conf['db']
+    raise Exception("Can't import conf")
+db_conf = conf['db']
 using_db = db_conf['using_db']
 if using_db is None:
     using_db = 'mysql'
