@@ -40,6 +40,7 @@ class DuplicatePipeline(object):
         # 字段存在校验
         # self.redis_db.flushall()
         # print(self.redis_db.hlen(item['unit']))
+        # print(item['unit'])
         if self.redis_db.hlen(item['unit']) == 0:
             self.redis_db.hset(item['unit'], item['url'], '')
             return item
@@ -72,8 +73,10 @@ class NewsItemPipeline(object):
         self.session.add(new_news)
         try:
             self.session.commit()
+            print("session commit")
         except sqlalchemy.exc.InvalidRequestError:
             self.session.rollback()
+            print("session rollback")
         return item
 
     def close_spider(self, spider):

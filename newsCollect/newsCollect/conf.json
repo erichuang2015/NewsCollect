@@ -13,7 +13,8 @@
         "db_info": {
             "mysql": {
                 "usr": "root",
-                "host": "localhost"
+                "host": "localhost",
+                "database": "NewsCollect"
             }
         }
     }

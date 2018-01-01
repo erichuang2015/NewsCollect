@@ -12,7 +12,8 @@ if conf is None:
         "db_info": {
             "mysql": {
                 "usr": "root",
-                "host": "localhost"
+                "host": "localhost",
+                "database": "NewsCollect",
             }
         }
     }
@@ -21,8 +22,12 @@ else:
 using_db = db_conf['using_db']
 if using_db is None:
     using_db = 'mysql'
-pw = 'ssh0912' # os.environ.get('MYSQL_PASSWORD', None)
-
+pw = os.environ.get('MYSQL_PASSWORD', None)
+if pw is None:
+    raise Exception("Can't get password of MySQL")
+mysql_info = db_conf['db_info'].get('mysql', None)
+if mysql_info is None and db_conf['using_db'] is 'mysql':
+    raise Exception("Can't gey MySQL info")
 
 # 对象基类
 Base = declarative_base()
@@ -43,11 +48,10 @@ class News(Base):
 
 def get_session(db_name='dev.db'):
     # if using_db is 'mysql':
-        # db_path = 'mysql://{}:{}@{}'.format(
-        #    db_conf['db_info']['mysql']['usr'], pw, db_conf['db_info']['mysql']['host'])
+    db_path = 'mysql+pymysql://{}:{}@{}/{}?charset=utf8'.format(
+        mysql_info['usr'], pw, mysql_info['host'], mysql_info['database'])
     # if using_db is 'sqlite':
     #    db_path = 'sqlite:///' + os.path.abspath('..') + '\%s' % db_name
-    db_path = 'mysql+pymysql://root:ssh0912@localhost/NewCollect'
     engine = create_engine(db_path)
     Base.metadata.create_all(engine)
     db_session = sessionmaker(bind=engine)
