@@ -7,11 +7,9 @@ newsCollect/.scrapy
 TODO.md
 **/__pycache__
 部署日志.md
-<<<<<<< HEAD
 fabric.py
-=======
 /env3
 nohup.out
 test.log 
 uwsgi.ini
->>>>>>> 411c425801a90fbf41d4e7b5431654566ea7cf38
+fabfile.py

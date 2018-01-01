@@ -14,8 +14,9 @@ import datetime
 app = Flask(__name__, template_folder='templates')
 app.debug = True
 bootstrap = Bootstrap(app)
-db_path = os.path.abspath('..') + '\data.db'
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///' + db_path
+# db_path = os.path.abspath('.') + '\data.db'
+db_path = 'mysql://root:ssh0912@localhost'
+app.config['SQLALCHEMY_DATABASE_URI'] = db_path # 'sqlite:///' + db_path
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = True
 db = SQLAlchemy(app)
 db.create_all()
