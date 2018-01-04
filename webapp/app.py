@@ -173,7 +173,7 @@ def detail(unit, tag):
     tag_list = get_tag_list(info[unit]['tag_codes'])
     # 分页数据获取需要优化
     q = News.query.filter_by(unit=info[unit]['unit'], type=tag).order_by(db.desc(News.time)).all()
-    max_page = len(q)
+    max_page = int(len(q) / 20)
     page = int(request.args.get('page', 1))
     if page < 1:
         page = 1
@@ -198,7 +198,6 @@ def detail(unit, tag):
         'max_page': max_page,
         'news_list': news_list,
     }
-    print(data['page'], data['max_page'])
     # current_app.logger.debug(url_for('detail', unit=unit, tag=tag_list[2], param=111))
     return render_template('detail.html', data=data)  
 
