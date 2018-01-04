@@ -15,7 +15,7 @@ app = Flask(__name__, template_folder='templates')
 app.debug = True
 bootstrap = Bootstrap(app)
 # db_path = os.path.abspath('.') + '\data.db'
-db_path = 'mysql+pymysql://root:ssh0912@localhost/NewCollect'
+db_path = 'mysql+pymysql://root:ssh0912@localhost/NewsCollect'
 app.config['SQLALCHEMY_DATABASE_URI'] = db_path # 'sqlite:///' + db_path
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = True
 db = SQLAlchemy(app)
@@ -100,13 +100,13 @@ def get_news_list(unit_code):
     news_list = []
     tag = request.args.get('tag', None)
     num = int(request.args.get('num', 10))
-    q = News.query.filter_by(unit=info[unit_code]['unit']).order_by('time')
+    q = News.query.filter_by(unit=info[unit_code]['unit']).order_by(db.desc(News.time))
     if tag is not None:
         q = q.filter_by(type=tag)
     q = q.all()
     if q is None:
         return not_found("items not found")
-    for i in range(num)[::-1]:
+    for i in range(num):
         try:
             item = {
                 'title': '【' + q[i].type + '】' + q[i].title,
@@ -170,13 +170,13 @@ def detail(unit, tag):
     """
     tag_list = get_tag_list(info[unit]['tag_codes'])
     # 分页数据获取需要优化
-    q = News.query.filter_by(unit=info[unit]['unit'], type=tag).order_by('time').all()
+    q = News.query.filter_by(unit=info[unit]['unit'], type=tag).order_by(db.desc(News.time)).all()
     max_page = len(q)
     page = int(request.args.get('page', 1))
     if page < 1:
         page = 1
     news_list = []
-    for i in range(20 * (page - 1), 20 * page)[::-1]:
+    for i in range(20 * (page - 1), 20 * page):
         try:
             item = {
                 'title': q[i].title,
