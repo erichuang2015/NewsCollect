@@ -13,7 +13,7 @@ db_conf = conf['db']
 using_db = db_conf['using_db']
 if using_db is None:
     using_db = 'mysql'
-pw = os.environ.get('MYSQL_PASSWORD', None)
+pw = 'ssh0912' # os.environ.get('MYSQL_PASSWORD', None)
 if pw is None:
     raise Exception("Can't get password of MySQL")
 mysql_info = db_conf['db_info'].get('mysql', None)
