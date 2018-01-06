@@ -32,7 +32,7 @@ var card = Vue.component('show-card', {
     },
     methods: {
         getItems: function() {
-            baseUrl = 'http://127.0.0.1:5000/api/news/';
+            baseUrl = '/api/news/';
             this.$http.jsonp(baseUrl + this.info.code)
                 .then((res) => {
                     this.items = res.data;
@@ -44,7 +44,7 @@ var card = Vue.component('show-card', {
 var app = new Vue({
     el: '#app',
     data: {
-        url: 'http://127.0.0.1:5000/api/unit_list',
+        url: '/api/unit_list',
         units: [],
         cache: [],
         currentInput: '',
