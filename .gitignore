@@ -13,3 +13,4 @@ nohup.out
 test.log 
 uwsgi.ini
 fabfile.py
+*.log
