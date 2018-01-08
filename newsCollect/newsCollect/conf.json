@@ -5,7 +5,7 @@
             "EA",
             "jxgc"
         ],
-        "crawl_page": 1
+        "crawl_page": 2
     },
     "redis": {
         "host": "127.0.0.1",

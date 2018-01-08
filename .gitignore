@@ -14,3 +14,4 @@ test.log
 uwsgi.ini
 fabfile.py
 *.log
+*_test.py

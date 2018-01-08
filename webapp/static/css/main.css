@@ -76,9 +76,13 @@ a, a:hover{
     border: 0px;
     font-size: 16px;
     color: #000000;
+    width:80%;
+    overflow:hidden; 
+    white-space:nowrap;
+    text-overflow:ellipsis;
 }
 
-.news-list, a:hover {
+.news-list > a:hover {
     color: #000000;
 }
 
