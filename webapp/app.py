@@ -7,7 +7,7 @@ import os, sys
 from bs4 import BeautifulSoup as bs
 from erros import not_found
 from info import info
-from utils import jsonp, get_tag_list
+from utils import jsonp, get_tag_list, get_conf_from_json
 from sqlalchemy.sql import func
 import datetime
 
@@ -15,8 +15,11 @@ app = Flask(__name__, template_folder='templates')
 app.debug = True
 bootstrap = Bootstrap(app)
 pw = os.environ.get('MYSQL_PASSWORD', None)
+config = get_conf_from_json('conf.json').get('webapp', None)
 if pw is None:
     raise Exception("Can't get password of MySQL")
+if config is None:
+    raise Exception("Can't get config of WebAPP")
 db_path = 'mysql+pymysql://root:{}@localhost/NewsCollect'.format(pw)
 app.config['SQLALCHEMY_DATABASE_URI'] = db_path # 'sqlite:///' + db_path
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = True
@@ -63,7 +66,7 @@ def unit_list():
     ]
     """
     unit_info = []
-    for unit in info:
+    for unit in config['units']:
         try:
             timestamp = News.query.filter_by(unit=info[unit]['unit'])\
                             .order_by('timestamp').first().timestamp
