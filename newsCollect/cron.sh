@@ -1,4 +1,6 @@
 #! /bin/sh
+. /etc/profile
+. ~/.bash_profile
 export PATH=$PATH:/usr/local/bin
 
 # 爬虫项目目录 新的部署需要更改路径
