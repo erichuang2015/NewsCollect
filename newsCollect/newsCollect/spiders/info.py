@@ -36,10 +36,12 @@ info = {
     },
     'CI': {
         'unit': '计算机与信息学院',
-        'url_template': 'http://ci.hfut.edu.cn/index/tit/cid/[tag_code]',
+        'url_template': 'http://ci.hfut.edu.cn/[tag_code]/list[page].htm',
         'tag_codes': {
-            '9': '通知公告',
-            '8': '学院新闻',
+            '3961': '通知公告',
+            '3962': '学院新闻',
+            'xsdtzd': '学术动态',
+            '3965': '教学信息',
         },
     },
     'EA': {

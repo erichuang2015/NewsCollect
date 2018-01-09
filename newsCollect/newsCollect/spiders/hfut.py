@@ -15,14 +15,9 @@ if sys.version_info.major == 2:
     sys.setdefaultencoding('utf8')
 
 
-conf = get_conf_from_json('../conf.json')
+conf = get_conf_from_json('../conf.json').get('spider', None)
 if conf is None:
-    conf = {
-        "spider": {
-        "load_spider": [],
-        "crawl_page": 1
-        }
-    }
+    raise Exception('Load config failed')
 
 class hfut(scrapy.Spider):
     name = 'hfut'

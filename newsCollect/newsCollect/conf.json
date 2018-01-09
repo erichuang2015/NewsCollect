@@ -3,7 +3,8 @@
         "load_spider": [
             "hfut",
             "EA",
-            "jxgc"
+            "jxgc",
+            "CI"
         ],
         "crawl_page": 2
     },
