@@ -36,7 +36,7 @@ class hfut(scrapy.Spider):
         max_page = int(response.xpath('//*[@id="pages"]/a/text()').extract()[-2])
         # print(max_page)
         code = response.meta['tag_code']
-        for p in range(1, conf['spider']['crawl_page']):
+        for p in range(1, conf['crawl_page']):
             url = render_url(self.url_template, tag_code=code, page=p)
             # print(url)
             yield Request(url, self.get_news, meta={'tag_code': code}, dont_filter=True)
