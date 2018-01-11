@@ -173,9 +173,16 @@ def detail(unit, tag):
     params:
         page: 页数
     """
-    tag_list = get_tag_list(info[unit]['tag_codes'])
-    # 分页数据获取需要优化
-    q = News.query.filter_by(unit=info[unit]['unit'], type=tag).order_by(db.desc(News.time)).all()
+    search = request.args.get('search', None)
+    if search is None:
+        tag_list = get_tag_list(info[unit]['tag_codes'])
+        q = News.query.filter_by(unit=info[unit]['unit'], type=tag).order_by(
+            db.desc(News.time)).all()
+    else:
+        tag_list = ['搜索']
+        q = News.query.filter(News.title.like('%{}%'.format(search))).order_by(
+            db.desc(News.time)).all()
+        tag = '搜索'
     max_page = int(len(q) / 20)
     page = int(request.args.get('page', 1))
     if page < 1:

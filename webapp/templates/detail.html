@@ -16,11 +16,12 @@
                     <img src="{{url_for('static', filename='img/hfut_logo.png')}}" alt="Logo">
                 </a>
             </div>
-            <span id="nav-title">{{data.unit}} | {{data.current_tag}}</span>
+            <span id="nav-title"> {{data.unit}} | {{data.current_tag}}</span>
         </div>
         <div class="nav col-md-4 col-xs-12">
             <div class="input-group ">
-                <input v-model="currentInput" type="text" id="input" class="form-control" placeholder="搜索新闻" onKeypress="javascript:if(event.keyCode == 32)event.returnValue = false;">
+                <input v-model="currentInput" type="text" id="input" onkeyup="keyup()"
+                 class="form-control" placeholder="搜索新闻" onKeypress="javascript:if(event.keyCode == 32)event.returnValue = false;">
             </div>
         </div>
     </div>
@@ -115,5 +116,17 @@
         </div>
     </div>
     <div class="clearfix visible-xs"></div>
+<script>
+    function search() {
+        var value = document.getElementById('input').value
+        var currentURL = window.location.href.split('?')[0]
+        window.location.href = currentURL + '?search=' + value
+    }
+    function keyup() {
+        if (event.keyCode == 13) {
+            search()
+        }
+    }
+</script>
 </body>
 </html>
