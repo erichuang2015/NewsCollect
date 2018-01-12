@@ -180,8 +180,9 @@ def detail(unit, tag):
             db.desc(News.time)).all()
     else:
         tag_list = ['搜索']
-        q = News.query.filter(News.title.like('%{}%'.format(search))).order_by(
-            db.desc(News.time)).all()
+        q = News.query.filter_by(unit=info[unit]['unit']).filter(
+                News.title.like('%{}%'.format(search))).order_by(
+                    db.desc(News.time)).all()
         tag = '搜索'
     max_page = int(len(q) / 20)
     page = int(request.args.get('page', 1))
