@@ -56,11 +56,22 @@ info = {
     },
     'MSE': {
         'unit': '材料科学与工程学院',
-        'url_template': 'http://mse.hfut.edu.cn/news.php?i=[tag_code]',
+        'url_template': 'http://mse.hfut.edu.cn/[tag_code]/list[page].htm',
         'tag_codes': {
-            '20': '学院新闻',
-            '21': '通知公告',
-        }
+            '3564': '学院新闻',
+            '3565': '通知公告',
+            '3549': '科研动态',
+        },
+        'rules': {
+            'url_template': 'http://mse.hfut.edu.cn/[tag_code]/list[page].htm',
+            'base_url': 'http://mse.hfut.edu.cn',
+            'max_page_xpath': '//*[@class="all_pages"]/text()',
+            'container_xpath': '//*[@id="wp_news_w23"]/ul',
+            'time_xpath': '/*[@class="news_date"]/text()',
+            'url_xpath': '/*[@class="news_menu"]/a/@href',
+            'title_xpath': '//*[@class="new_name"]/text()',
+            'content_id': None,
+            'content_class': 'wp_articlecontent',
+        },
     }
-
 }

@@ -6,6 +6,7 @@
             "jxgc",
             "CI"
         ],
+        "general_load":["MSE"],
         "crawl_page": 2
     },
     "redis": {
@@ -27,7 +28,14 @@
         "units": [
             "hfut",
             "EA",
-            "jxgc"
+            "jxgc",
+            "CI"
         ]
+    },
+    "project":{
+        "mail": "932142511@qq.com",
+        "watcher": {
+            "interval": 3600
+        }
     }
 }

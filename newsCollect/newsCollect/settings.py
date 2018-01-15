@@ -10,7 +10,7 @@
 #     http://scrapy.readthedocs.org/en/latest/topics/spider-middleware.html
 
 BOT_NAME = 'newsCollect'
-LOG_LEVEL = 'INFO'
+# LOG_LEVEL = 'INFO'
 
 SPIDER_MODULES = ['newsCollect.spiders']
 NEWSPIDER_MODULE = 'newsCollect.spiders'
